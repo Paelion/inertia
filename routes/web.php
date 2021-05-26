@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ClientController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,4 +39,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/blog', [BlogController::class, "store"])->name('blog.store');
 
     Route::get('/blog/{id}/toggle', [BlogController::class, 'toggle'])->name('blog.toggle');
+
+
+    // CLIENT
+
+    Route::get('/client', [ClientController::class, "index"])->name('client.index');
+    Route::get('/client/create', [ClientController::class, "create"])->name('client.create');
+    Route::get('/client/{id}/edit', [ClientController::class, "edit"])->name('client.edit');
+
+    Route::put('/client/{id}', [ClientController::class, "update"])->name('client.update');
+    Route::post('/client', [ClientController::class, "store"])->name('client.store');
+
 });
