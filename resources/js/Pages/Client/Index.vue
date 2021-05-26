@@ -2,8 +2,11 @@
   <app-layout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Blog
+        Client
       </h2>
+      <jet-button @click="newClient" :href="route('client.create')" :active="route().current('client.create')" class="mt-5">
+        Créer un client
+      </jet-button>
     </template>
 
     <div class="py-12">
@@ -19,12 +22,21 @@
 <script>
 import AppLayout from '@/Layouts/AppLayout'
 import ClientList from '@/Components/ClientList'
+import JetButton from "@/Jetstream/Button";
+import Button from "../../../../vendor/laravel/jetstream/stubs/inertia/resources/js/Jetstream/Button";
 
 export default {
   props: ['clients'],
   components: {
+    Button,
     AppLayout,
-    ClientList
+    ClientList,
+    JetButton
   },
+  methods: {
+    newClient(){
+      this.$inertia.visit(this.route('client.create'));
+    }
+  }
 }
 </script>

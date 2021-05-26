@@ -23,16 +23,16 @@
     <!-- Odd row -->
     <tr v-for="item in items">
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-        {{ item.description }}
+        {{ item.company_name }}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        {{ item.company_name }}
+        {{ item.description.substr(0, 40) }}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         {{ item.projects }}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-        <a href="#" class="text-indigo-600 hover:text-indigo-900">Editer</a>
+        <a @click="edit(item)" class="text-indigo-600 hover:text-indigo-900">Editer</a>
       </td>
     </tr>
     </tbody>
@@ -43,5 +43,10 @@
 export default {
   name: 'ClientList',
   props: ['items'],
+  methods: {
+    edit(item){
+      this.$inertia.visit(this.route('client.edit', [item.id]));
+    }
+  }
 }
 </script>

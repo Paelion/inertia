@@ -49,5 +49,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::put('/client/{id}', [ClientController::class, "update"])->name('client.update');
     Route::post('/client', [ClientController::class, "store"])->name('client.store');
+    Route::delete('/client/{id}', [ClientController::class, "delete"])->name('client.delete');
 
 });

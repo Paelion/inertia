@@ -2,8 +2,11 @@
   <app-layout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Test
+        {{ form.company_name }}
       </h2>
+      <jet-danger-button class="ml-2" @click="clickDetection" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+        Delete Account
+      </jet-danger-button>
     </template>
 
     <div class="py-12">
@@ -95,9 +98,28 @@
               Sauvegarder
             </jet-button>
           </form>
+          <jet-button @click="cancel" class="mt-5">
+            Annuler
+          </jet-button>
         </div>
       </div>
     </div>
+
+    <jet-dialog-modal :show="clickDetectionButton" @close="closeModal">
+      <template #title>
+        Delete Account
+      </template>
+
+      <template #footer>
+        <jet-secondary-button @click="closeModal">
+          Cancel
+        </jet-secondary-button>
+
+        <jet-danger-button class="ml-2" @click="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+          Delete Account
+        </jet-danger-button>
+      </template>
+    </jet-dialog-modal>
   </app-layout>
 </template>
 <script>
@@ -106,6 +128,9 @@ import JetInput from '@/Jetstream/Input'
 import JetInputError from '@/Jetstream/InputError'
 import JetLabel from '@/Jetstream/Label'
 import JetButton from '@/Jetstream/Button'
+import JetDangerButton from '@/Jetstream/DangerButton'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import JetDialogModal from '@/Jetstream/DialogModal'
 
 export default {
   props: ['client', 'errors'],
@@ -114,7 +139,10 @@ export default {
     JetInput,
     JetInputError,
     JetLabel,
-    JetButton
+    JetButton,
+    JetDangerButton,
+    JetSecondaryButton,
+    JetDialogModal
   },
   data() {
     return {
@@ -130,13 +158,32 @@ export default {
         zip_code: this.client.zip_code,
         city: this.client.city,
         projects: this.client.projects
-      })
+      }),
+      clickDetectionButton: false
     }
   },
-
   methods: {
     update() {
       this.form.put(this.route('client.update', [this.client.id]), this.form);
+    },
+    clickDetection() {
+      this.clickDetectionButton = true;
+    },
+    deleteUser() {
+      this.form.delete(this.route('client.delete', [this.client.id]), {
+        preserveScroll: true,
+        onSuccess: () => this.closeModal(),
+        onError: () => 'erreur',
+        onFinish: () => this.form.reset(),
+      })
+    },
+    closeModal() {
+      this.clickDetectionButton = false;
+      console.log('this.clickDetection2',this.clickDetectionButton)
+      this.form.reset();
+    },
+    cancel(){
+      this.$inertia.visit(this.route('client.index'));
     }
   }
 }

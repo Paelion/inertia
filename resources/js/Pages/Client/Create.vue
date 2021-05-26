@@ -95,6 +95,9 @@
               Sauvegarder
             </jet-button>
           </form>
+          <jet-button @click="cancel" class="mt-5">
+            Annuler
+          </jet-button>
         </div>
       </div>
     </div>
@@ -134,10 +137,12 @@ export default {
       })
     }
   },
-
   methods: {
     save() {
       this.form.post(this.route('client.store'), this.form);
+    },
+    cancel(){
+      this.$inertia.visit(this.route('client.index'));
     }
   }
 }
