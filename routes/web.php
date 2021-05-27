@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,9 +28,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
+    /*Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
-    })->name('dashboard');
+    })->name('dashboard');*/
+
+    Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
+
 
     // CLIENT
 

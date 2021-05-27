@@ -108,4 +108,5 @@ class ClientController extends Controller
         $client->delete();
         return redirect()->route('client.index');
     }
+
 }

@@ -66,14 +66,14 @@
 
               <div class="col-span-6 sm:col-span-4">
                 <jet-label for="start_date" value="Début du projet"/>
-                <jet-input id="start_date" type="start_date" class="mt-1 block w-full" v-model="form.start_date"
+                <jet-input id="start_date" type="date" class="mt-1 block w-full" v-model="form.start_date"
                            ref="start_date" autocomplete="start_date"/>
                 <jet-input-error :message="form.errors.start_date" class="mt-2"/>
               </div>
 
               <div class="col-span-6 sm:col-span-4">
                 <jet-label for="end_date" value="Fin estimée du projet"/>
-                <jet-input id="end_date" type="end_date" class="mt-1 block w-full" v-model="form.end_date"
+                <jet-input id="end_date" type="date" class="mt-1 block w-full" v-model="form.end_date"
                            ref="end_date" autocomplete="end_date"/>
                 <jet-input-error :message="form.errors.end_date" class="mt-2"/>
               </div>
