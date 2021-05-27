@@ -3,7 +3,7 @@
         <jet-banner />
 
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-gray-800 border-b border-gray-600">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -18,14 +18,14 @@
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                  Dashboard
                                 </jet-nav-link>
-                              <jet-nav-link :href="route('client.index')" :active="route().current('client.index')">
-                                Client
-                              </jet-nav-link>
-                              <jet-nav-link :href="route('project.index')" :active="route().current('project.index')">
-                                Project
-                              </jet-nav-link>
+                                <jet-nav-link :href="route('client.index')" :active="route().current('client.index')">
+                                  Client
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('project.index')" :active="route().current('project.index')">
+                                  Project
+                                </jet-nav-link>
                             </div>
                         </div>
 
@@ -94,7 +94,7 @@
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-gray-900 hover:text-gray-300 focus:outline-none transition">
                                                 {{ $page.props.user.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -227,14 +227,14 @@
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-gray-800 shadow header-relative" v-if="$slots.header">
+                <div class="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
                     <slot name="header"></slot>
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="main-relavive">
                 <slot></slot>
             </main>
         </div>
@@ -280,3 +280,20 @@
         }
     }
 </script>
+<style>
+  .py-20 {
+    padding-top: 100px;
+    padding-bottom: 200px;
+  }
+
+  .header-relative {
+    position: relative;
+    z-index: 1;
+  }
+
+  .main-relavive {
+    position: relative;
+    z-index: 2;
+    margin-top: -220px;
+  }
+</style>
