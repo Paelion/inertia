@@ -20,9 +20,6 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('blog.index')" :active="route().current('blog.index')">
-                                    Blog
-                                </jet-nav-link>
                               <jet-nav-link :href="route('client.index')" :active="route().current('client.index')">
                                 Client
                               </jet-nav-link>
@@ -152,8 +149,11 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :href="route('blog.index')" :active="route().current('blog.index')">
-                            Blog
+                        <jet-responsive-nav-link :href="route('client.index')" :active="route().current('client.index')">
+                            Clients
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('project.index')" :active="route().current('project.index')">
+                          Projets
                         </jet-responsive-nav-link>
                     </div>
 

@@ -13,8 +13,12 @@
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-4">
                 <jet-label for="client" value="Client"/>
-                <jet-input id="client" type="client" class="mt-1 block w-full" v-model="form.client"
-                           ref="client" autocomplete="client"/>
+                <select id="client"  class="block mt-1 w-full" name="client" v-model="form.client">
+                  <option value="" disabled selected>Séléctionner un client</option>
+                  <option v-for="client in clients" :value="client.company_name">
+                    {{ client.company_name }}
+                  </option>
+                </select>
                 <jet-input-error :message="form.errors.client" class="mt-2"/>
               </div>
 
@@ -83,8 +87,18 @@
 
               <div class="col-span-6 sm:col-span-4">
                 <jet-label for="status" value="Statut du projet"/>
-                <jet-input id="status" type="city" class="mt-1 block w-full" v-model="form.status"
-                           ref="status" autocomplete="status"/>
+                <select id="status" class="block mt-1 w-full" name="status" v-model="form.status">
+                  <option value="" disabled selected>Séléctionner un statut</option>
+                  <option value="1">
+                    Treminé
+                  </option>
+                  <option value="2">
+                    En cours
+                  </option>
+                  <option value="3">
+                    Annulé
+                  </option>
+                </select>
                 <jet-input-error :message="form.errors.status" class="mt-2"/>
               </div>
 
@@ -117,7 +131,7 @@ import JetLabel from '@/Jetstream/Label'
 import JetButton from '@/Jetstream/Button'
 
 export default {
-  props: ['errors'],
+  props: ['errors', 'clients'],
   components: {
     AppLayout,
     JetInput,

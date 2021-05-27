@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +20,9 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return Inertia::render('Project/Create');
+        return Inertia::render('Project/Create', [
+            'clients' => Client::all()
+        ]);
     }
 
     public function edit($id)

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
@@ -31,16 +30,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-
-    Route::get('/blog', [BlogController::class, "index"])->name('blog.index');
-    Route::get('/blog/create', [BlogController::class, "create"])->name('blog.create');
-    Route::get('/blog/{id}/edit', [BlogController::class, "edit"])->name('blog.edit');
-
-    Route::put('/blog/{id}', [BlogController::class, "update"])->name('blog.update');
-    Route::post('/blog', [BlogController::class, "store"])->name('blog.store');
-
-    Route::get('/blog/{id}/toggle', [BlogController::class, 'toggle'])->name('blog.toggle');
-
 
     // CLIENT
 
