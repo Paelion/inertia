@@ -90,8 +90,6 @@
                            ref="projects" autocomplete="projects"/>
                 <jet-input-error :message="form.errors.projects" class="mt-2"/>
               </div>
-
-
             </div>
 
             <jet-button :class="{ 'opacity-25': form.processing }" class="mt-5" :disabled="form.processing">
@@ -179,7 +177,6 @@ export default {
     },
     closeModal() {
       this.clickDetectionButton = false;
-      console.log('this.clickDetection2',this.clickDetectionButton)
       this.form.reset();
     },
     cancel(){

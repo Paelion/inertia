@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,5 +51,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('/client/{id}', [ClientController::class, "update"])->name('client.update');
     Route::post('/client', [ClientController::class, "store"])->name('client.store');
     Route::delete('/client/{id}', [ClientController::class, "delete"])->name('client.delete');
+
+
+    // PROJECT
+
+    Route::get('/project', [ProjectController::class, "index"])->name('project.index');
+    Route::get('/project/create', [ProjectController::class, "create"])->name('project.create');
+    Route::get('/project/{id}/edit', [ProjectController::class, "edit"])->name('project.edit');
+
+    Route::put('/project/{id}', [ProjectController::class, "update"])->name('project.update');
+    Route::post('/project', [ProjectController::class, "store"])->name('project.store');
+    Route::delete('/project/{id}', [ProjectController::class, "delete"])->name('project.delete');
 
 });

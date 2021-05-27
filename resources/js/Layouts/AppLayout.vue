@@ -26,6 +26,9 @@
                               <jet-nav-link :href="route('client.index')" :active="route().current('client.index')">
                                 Client
                               </jet-nav-link>
+                              <jet-nav-link :href="route('project.index')" :active="route().current('project.index')">
+                                Project
+                              </jet-nav-link>
                             </div>
                         </div>
 

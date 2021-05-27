@@ -87,8 +87,6 @@
                            ref="projects" autocomplete="projects"/>
                 <jet-input-error :message="form.errors.projects" class="mt-2"/>
               </div>
-
-
             </div>
 
             <jet-button :class="{ 'opacity-25': form.processing }" class="mt-5" :disabled="form.processing">
