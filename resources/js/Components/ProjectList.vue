@@ -18,9 +18,6 @@
           class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
         Tickets
       </th>
-      <th scope="col" class="relative px-6 py-3">
-        <a @click="edit(item)" class="text-indigo-600 hover:text-indigo-900">Editer</a>
-      </th>
     </tr>
     </thead>
     <tbody>
@@ -33,7 +30,7 @@
         {{ item.client }}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        {{ item.description.substr(0, 40) }}
+        {{ item.description.substr(0, 15) }}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         {{ item.status }}

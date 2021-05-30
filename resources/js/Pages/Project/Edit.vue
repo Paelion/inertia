@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      <h2 class="font-bold text-white leading-tight">
         {{ form.title }}
       </h2>
       <jet-danger-button class="ml-2" @click="clickDetection" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -192,3 +192,9 @@ export default {
   }
 }
 </script>
+
+<style>
+h2 {
+  font-size: 35px;
+}
+</style>

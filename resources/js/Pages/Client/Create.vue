@@ -1,7 +1,7 @@
 <template>
   <app-layout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      <h2 class="font-bold text-white leading-tight">
         Créer un client
       </h2>
     </template>
@@ -145,3 +145,10 @@ export default {
   }
 }
 </script>
+
+<style>
+h2 {
+  font-size: 35px;
+}
+</style>
+

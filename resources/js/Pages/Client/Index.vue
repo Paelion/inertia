@@ -1,10 +1,10 @@
 <template>
   <app-layout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Client
+      <h2 class="font-bold text-white leading-tight">
+        Clients
       </h2>
-      <jet-button @click="newClient" :href="route('client.create')" :active="route().current('client.create')" class="mt-5">
+      <jet-button @click="newClient" :href="route('client.create')" :active="route().current('client.create')" class="mt-5 button-add">
         Créer un client
       </jet-button>
     </template>
@@ -40,3 +40,22 @@ export default {
   }
 }
 </script>
+
+<style>
+h2 {
+  font-size: 35px;
+}
+
+.button-add {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  background-color: #6467f1;
+}
+
+.button-add:before {
+  content: "+";
+  padding-right: 8px;
+  font-size: 20px;
+}
+</style>

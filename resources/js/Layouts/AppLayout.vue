@@ -20,11 +20,11 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                   Dashboard
                                 </jet-nav-link>
-                                <jet-nav-link :href="route('client.index')" :active="route().current('client.index')">
-                                  Client
-                                </jet-nav-link>
                                 <jet-nav-link :href="route('project.index')" :active="route().current('project.index')">
-                                  Project
+                                  Projects
+                                </jet-nav-link>
+                                <jet-nav-link :href="route('client.index')" :active="route().current('client.index')">
+                                  Clients
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -149,11 +149,11 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :href="route('client.index')" :active="route().current('client.index')">
-                            Clients
-                        </jet-responsive-nav-link>
                         <jet-responsive-nav-link :href="route('project.index')" :active="route().current('project.index')">
                           Projets
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('client.index')" :active="route().current('client.index')">
+                            Clients
                         </jet-responsive-nav-link>
                     </div>
 
@@ -282,7 +282,7 @@
 </script>
 <style>
   .py-20 {
-    padding-top: 100px;
+    padding-top: 70px;
     padding-bottom: 200px;
   }
 
@@ -294,6 +294,7 @@
   .main-relavive {
     position: relative;
     z-index: 2;
-    margin-top: -220px;
+    margin-top: -210px;
+    padding: 0 50px;
   }
 </style>
