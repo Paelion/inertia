@@ -29,7 +29,8 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         return Inertia::render('Project/Edit', [
-            'project' => $project
+            'project' => $project,
+            'clients' => Client::all()
         ]);
     }
 

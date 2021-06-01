@@ -8,7 +8,7 @@
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 relative-form">
           <form @submit.prevent="save">
             <div class="grid grid-cols-2 gap-6">
               <div class="text-block col-span-6 sm:col-span-4">
@@ -16,9 +16,9 @@
                 <span class="text-gray-600">Ces informations serviront à savoir qui dirige le projet du côté du client</span>
               </div>
 
-              <div class="form-flex col-span-6 sm:col-span-4">
+              <div class="form-flex col-span-6 sm:col-span-4 pt-5">
                 <jet-label for="client" value="Client"/>
-                <select id="client"  class="block mt-1 w-50" name="client" v-model="form.client">
+                <select id="client"  class="border-gray-200 rounded-md shadow-sm block mt-1 w-50" name="client" v-model="form.client">
                   <option value="" disabled selected>Séléctionner un client</option>
                   <option v-for="client in clients" :value="client.company_name">
                     {{ client.company_name }}
@@ -55,6 +55,11 @@
                 <jet-input-error :message="form.errors.email" class="mt-2"/>
               </div>
 
+              <div class="form-separator text-block col-span-6 sm:col-span-4">
+                <div class="font-bold text-xl text-black">Information projet</div>
+                <span class="text-gray-600">Use a permanent address where you can receive mail.</span>
+              </div>
+
               <div class="form-flex col-span-6 sm:col-span-4">
                 <jet-label for="title" value="Titre"/>
                 <jet-input id="title" type="title" class="mt-1 block w-50" v-model="form.title"
@@ -62,9 +67,9 @@
                 <jet-input-error :message="form.errors.title" class="mt-2"/>
               </div>
 
-              <div class="form-flex col-span-6 sm:col-span-4">
+              <div class="form-flex col-span-6 sm:col-span-4 p-5">
                 <jet-label for="description" value="Description"/>
-                <textarea class="mt-1 block w-50" name="description" cols="10" rows="10"
+                <textarea class="border-gray-200 rounded-md shadow mt-1 block w-50" name="description" cols="10" rows="10"
                           v-model="form.description"></textarea>
                 <jet-input-error :message="form.errors.description" class="mt-2"/>
               </div>
@@ -90,9 +95,9 @@
                 <jet-input-error :message="form.errors.zip_code" class="mt-2"/>
               </div>
 
-              <div class="form-flex col-span-6 sm:col-span-4">
+              <div class="form-flex col-span-6 sm:col-span-4 pt-5">
                 <jet-label for="status" value="Statut du projet"/>
-                <select id="status" class="block mt-1 w-50" name="status" v-model="form.status">
+                <select id="status" class="border-gray-200 rounded-md shadow block mt-1 w-50" name="status" v-model="form.status">
                   <option value="" disabled selected>Séléctionner un statut</option>
                   <option value="1">
                     Treminé
@@ -115,11 +120,11 @@
               </div>
             </div>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" class="mt-5" :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" class="btn-save mt-5" :disabled="form.processing">
               Sauvegarder
             </jet-button>
           </form>
-          <jet-button @click="cancel" class="mt-5">
+          <jet-button @click="cancel" class="btn-cancel mt-5">
             Annuler
           </jet-button>
         </div>
@@ -173,6 +178,16 @@ export default {
 </script>
 
 <style>
+
+.relative-form {
+  position: relative;
+  padding: 20px 40px;
+}
+
+.relative-form form {
+  padding-bottom: 80px;
+}
+
 h2 {
   font-size: 35px;
 }
@@ -187,6 +202,15 @@ h2 {
 
 .form-flex {
   display: flex;
+  align-items: center;
+  border-top: 1px solid #e6e7eb;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.form-separator {
+  border-top: 1px solid #e6e7eb;
+  padding-top: 20px;
 }
 
 .form-flex label{
@@ -195,6 +219,24 @@ h2 {
 
 .w-50 {
   width: 50%;
+}
+
+.btn-save {
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  margin-bottom: 20px;
+  background-color: #6467f1;
+}
+
+.btn-cancel {
+  position: absolute;
+  right: 200px;
+  bottom: 0;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid #e6e7eb;
+  color: black;
 }
 </style>
 

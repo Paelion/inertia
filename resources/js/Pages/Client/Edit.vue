@@ -5,13 +5,13 @@
         {{ form.company_name }}
       </h2>
       <jet-danger-button class="ml-2 button-delete" @click="clickDetection" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-        Delete Account
+       Supprimer
       </jet-danger-button>
     </template>
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 relative-form">
           <form @submit.prevent="update">
             <div class="grid grid-cols-2 gap-6">
               <div class="text-block col-span-6 sm:col-span-4">
@@ -61,6 +61,11 @@
                 <jet-input-error :message="form.errors.code_naf" class="mt-2"/>
               </div>
 
+              <div class="form-separator text-block col-span-6 sm:col-span-4">
+                <div class="font-bold text-xl text-black">Adresse</div>
+                <span class="text-gray-600">Localisation du siège social.</span>
+              </div>
+
               <div class="form-flex col-span-6 sm:col-span-4">
                 <jet-label for="country" value="Pays"/>
                 <jet-input id="country" type="country" class="mt-1 block w-50" v-model="form.country"
@@ -68,9 +73,9 @@
                 <jet-input-error :message="form.errors.country" class="mt-2"/>
               </div>
 
-              <div class="form-flex col-span-6 sm:col-span-4">
+              <div class="form-flex col-span-6 sm:col-span-4 pt-5">
                 <jet-label for="address" value="Adresse"/>
-                <textarea class="mt-1 block w-50" name="address" cols="10" rows="10"
+                <textarea class="border-gray-200 rounded-md shadow mt-1 block w-50" name="address" cols="10" rows="10"
                           v-model="form.address"></textarea>
                 <jet-input-error :message="form.errors.address" class="mt-2"/>
               </div>
@@ -97,11 +102,11 @@
               </div>
             </div>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" class="mt-5" :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" class="btn-save mt-5" :disabled="form.processing">
               Sauvegarder
             </jet-button>
           </form>
-          <jet-button @click="cancel" class="mt-5">
+          <jet-button @click="cancel" class="btn-cancel mt-5">
             Annuler
           </jet-button>
         </div>
@@ -110,16 +115,29 @@
 
     <jet-dialog-modal :show="clickDetectionButton" @close="closeModal">
       <template #title>
-        Delete Account
+        <div class="modal-title font-bold">
+          <div class="modal-warning">
+            <img src="https://www.pauline-aelion.fr/img_other/warning.png" alt="warning">
+          </div>
+          Supprimer le client "{{ client.company_name }}"
+        </div>
+
+      </template>
+
+      <template #content>
+        <div class="modal-content text-gray-600">
+          Etes-vous réellement sûr de vouloir supprimer ce client ?<br>
+          Cette action est irréversible
+        </div>
       </template>
 
       <template #footer>
         <jet-secondary-button @click="closeModal">
-          Cancel
+          Annuler
         </jet-secondary-button>
 
         <jet-danger-button class="ml-2" @click="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-          Delete Account
+          Supprimer
         </jet-danger-button>
       </template>
     </jet-dialog-modal>
@@ -192,6 +210,15 @@ export default {
 </script>
 
 <style>
+.relative-form {
+  position: relative;
+  padding: 20px 40px;
+}
+
+.relative-form form {
+  padding-bottom: 80px;
+}
+
 h2 {
   font-size: 35px;
 }
@@ -208,6 +235,11 @@ h2 {
   display: flex;
 }
 
+.form-separator {
+  border-top: 1px solid #e6e7eb;
+  padding-top: 20px;
+}
+
 .form-flex label{
   width: 200px;
 }
@@ -220,5 +252,46 @@ h2 {
   position: absolute;
   right: 50px;
   top: 70px;
+}
+
+.btn-save {
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  margin-bottom: 20px;
+  background-color: #6467f1;
+}
+
+.btn-cancel {
+  position: absolute;
+  right: 200px;
+  bottom: 0;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid #e6e7eb;
+  color: black;
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+}
+
+.modal-content {
+  padding-left: 60px;
+}
+
+.modal-warning {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  background-color: #f0d6d6;
+  border-radius: 30px;
+}
+
+.modal-warning img {
+  height: 28px;
+  margin-left: 8px;
+  padding-top: 5px;
 }
 </style>

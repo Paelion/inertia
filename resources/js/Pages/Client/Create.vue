@@ -8,7 +8,7 @@
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 relative-form">
           <form @submit.prevent="save">
             <div class="grid grid-cols-2 gap-6">
               <div class="text-block col-span-6 sm:col-span-4">
@@ -58,6 +58,11 @@
                 <jet-input-error :message="form.errors.code_naf" class="mt-2"/>
               </div>
 
+              <div class="form-separator text-block col-span-6 sm:col-span-4">
+                <div class="font-bold text-xl text-black">Adresse</div>
+                <span class="text-gray-600">Localisation du siège social.</span>
+              </div>
+
               <div class="form-flex col-span-6 sm:col-span-4">
                 <jet-label for="country" value="Pays"/>
                 <jet-input id="country" type="country" class="mt-1 block w-50" v-model="form.country"
@@ -65,9 +70,9 @@
                 <jet-input-error :message="form.errors.country" class="mt-2"/>
               </div>
 
-              <div class="form-flex col-span-6 sm:col-span-4">
+              <div class="form-flex col-span-6 sm:col-span-4 pt-5">
                 <jet-label for="address" value="Adresse"/>
-                <textarea class="mt-1 block w-50" name="address" cols="10" rows="10"
+                <textarea class="border-gray-200 rounded-md shadow t-1 block w-50" name="address" cols="10" rows="10"
                           v-model="form.address"></textarea>
                 <jet-input-error :message="form.errors.address" class="mt-2"/>
               </div>
@@ -94,11 +99,11 @@
               </div>
             </div>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" class="mt-5" :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" class="btn-save mt-5" :disabled="form.processing">
               Sauvegarder
             </jet-button>
           </form>
-          <jet-button @click="cancel" class="mt-5">
+          <jet-button @click="cancel" class="btn-cancel mt-5">
             Annuler
           </jet-button>
         </div>
@@ -152,6 +157,15 @@ export default {
 </script>
 
 <style>
+.relative-form {
+  position: relative;
+  padding: 20px 40px;
+}
+
+.relative-form form {
+  padding-bottom: 80px;
+}
+
 h2 {
   font-size: 35px;
 }
@@ -171,6 +185,11 @@ h2 {
   border-top: 1px solid #e5e7eb;
 }
 
+.form-separator {
+  border-top: 1px solid #e6e7eb;
+  padding-top: 20px;
+}
+
 .form-flex label{
   width: 200px;
   padding-top: 25px;
@@ -182,6 +201,24 @@ h2 {
 
 .w-50 {
   width: 50%;
+}
+
+.btn-save {
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  margin-bottom: 20px;
+  background-color: #6467f1;
+}
+
+.btn-cancel {
+  position: absolute;
+  right: 200px;
+  bottom: 0;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid #e6e7eb;
+  color: black;
 }
 </style>
 

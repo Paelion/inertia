@@ -5,13 +5,13 @@
         {{ form.title }}
       </h2>
       <jet-danger-button class="ml-2 button-delete" @click="clickDetection" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-        Delete Account
+        Supprimer
       </jet-danger-button>
     </template>
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 relative-form">
           <form @submit.prevent="update">
             <div class="grid grid-cols-2 gap-6">
               <div class="text-block col-span-6 sm:col-span-4">
@@ -19,10 +19,14 @@
                 <span class="text-gray-600">Ces informations serviront à savoir qui dirige le projet du côté du client</span>
               </div>
 
-              <div class="form-flex col-span-6 sm:col-span-4">
+              <div class="form-flex col-span-6 sm:col-span-4 pt-5">
                 <jet-label for="client" value="Client"/>
-                <jet-input id="client" type="client" class="mt-1 block w-50" v-model="form.client"
-                           ref="client" autocomplete="client"/>
+                <select id="client"  class="border-gray-200 rounded-md shadow-sm block mt-1 w-50" name="client" v-model="form.client">
+                  <option value="" disabled selected>Séléctionner un client</option>
+                  <option v-for="client in clients" :value="client.company_name">
+                    {{ client.company_name }}
+                  </option>
+                </select>
                 <jet-input-error :message="form.errors.client" class="mt-2"/>
               </div>
 
@@ -54,6 +58,11 @@
                 <jet-input-error :message="form.errors.email" class="mt-2"/>
               </div>
 
+              <div class="form-separator text-block col-span-6 sm:col-span-4">
+                <div class="font-bold text-xl text-black">Information projet</div>
+                <span class="text-gray-600">Use a permanent address where you can receive mail.</span>
+              </div>
+
               <div class="form-flex col-span-6 sm:col-span-4">
                 <jet-label for="title" value="Titre"/>
                 <jet-input id="title" type="title" class="mt-1 block w-50" v-model="form.title"
@@ -61,9 +70,9 @@
                 <jet-input-error :message="form.errors.title" class="mt-2"/>
               </div>
 
-              <div class="form-flex col-span-6 sm:col-span-4">
+              <div class="form-flex col-span-6 sm:col-span-4 p5">
                 <jet-label for="description" value="Description"/>
-                <textarea class="mt-1 block w-50" name="description" cols="10" rows="10"
+                <textarea class="border-gray-200 rounded-md shadow mt-1 block w-50" name="description" cols="10" rows="10"
                           v-model="form.description"></textarea>
                 <jet-input-error :message="form.errors.description" class="mt-2"/>
               </div>
@@ -89,10 +98,20 @@
                 <jet-input-error :message="form.errors.zip_code" class="mt-2"/>
               </div>
 
-              <div class="form-flex col-span-6 sm:col-span-4">
+              <div class="form-flex col-span-6 sm:col-span-4 pt-5">
                 <jet-label for="status" value="Statut du projet"/>
-                <jet-input id="status" type="city" class="mt-1 block w-50" v-model="form.status"
-                           ref="status" autocomplete="status"/>
+                <select id="status" class="border-gray-200 rounded-md shadow block mt-1 w-50" name="status" v-model="form.status">
+                  <option value="" disabled selected>Séléctionner un statut</option>
+                  <option value="1">
+                    Treminé
+                  </option>
+                  <option value="2">
+                    En cours
+                  </option>
+                  <option value="3">
+                    Annulé
+                  </option>
+                </select>
                 <jet-input-error :message="form.errors.status" class="mt-2"/>
               </div>
 
@@ -104,11 +123,11 @@
               </div>
             </div>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" class="mt-5" :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" class="btn-save mt-5" :disabled="form.processing">
               Sauvegarder
             </jet-button>
           </form>
-          <jet-button @click="cancel" class="mt-5">
+          <jet-button @click="cancel" class="btn-cancel mt-5">
             Annuler
           </jet-button>
         </div>
@@ -117,16 +136,29 @@
 
     <jet-dialog-modal :show="clickDetectionButton" @close="closeModal">
       <template #title>
-        Delete Account
+        <div class="modal-title font-bold">
+          <div class="modal-warning">
+            <img src="https://www.pauline-aelion.fr/img_other/warning.png" alt="warning">
+          </div>
+          Supprimer le projet "{{ project.title }}"
+        </div>
+
+      </template>
+
+      <template #content>
+        <div class="modal-content text-gray-600">
+          Etes-vous réellement sûr de vouloir supprimer ce projet ?<br>
+          Cette action est irréversible
+        </div>
       </template>
 
       <template #footer>
         <jet-secondary-button @click="closeModal">
-          Cancel
+          Annuler
         </jet-secondary-button>
 
         <jet-danger-button class="ml-2" @click="deleteUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-          Delete Account
+          Supprimer
         </jet-danger-button>
       </template>
     </jet-dialog-modal>
@@ -143,7 +175,7 @@ import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 import JetDialogModal from '@/Jetstream/DialogModal'
 
 export default {
-  props: ['project', 'errors'],
+  props: ['project', 'clients', 'errors'],
   components: {
     AppLayout,
     JetInput,
@@ -199,6 +231,15 @@ export default {
 </script>
 
 <style>
+.relative-form {
+  position: relative;
+  padding: 20px 40px;
+}
+
+.relative-form form {
+  padding-bottom: 80px;
+}
+
 h2 {
   font-size: 35px;
 }
@@ -215,6 +256,11 @@ h2 {
   display: flex;
 }
 
+.form-separator {
+  border-top: 1px solid #e6e7eb;
+  padding-top: 20px;
+}
+
 .form-flex label{
   width: 200px;
 }
@@ -227,5 +273,46 @@ h2 {
   position: absolute;
   right: 50px;
   top: 70px;
+}
+
+.btn-save {
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  margin-bottom: 20px;
+  background-color: #6467f1;
+}
+
+.btn-cancel {
+  position: absolute;
+  right: 200px;
+  bottom: 0;
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid #e6e7eb;
+  color: black;
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+}
+
+.modal-content {
+  padding-left: 60px;
+}
+
+.modal-warning {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  background-color: #f0d6d6;
+  border-radius: 30px;
+}
+
+.modal-warning img {
+  height: 28px;
+  margin-left: 8px;
+  padding-top: 5px;
 }
 </style>
