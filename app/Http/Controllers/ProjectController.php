@@ -36,22 +36,25 @@ class ProjectController extends Controller
 
     public function update($id)
     {
-        /*$slug = Str::slug(request()->get('name'));
-           $data = array_merge(request()->all(), ['slug' => $slug]);
+       $data = array_merge(request()->all());
 
-           $validator = Validator::make($data, [
-               'name'      => 'required',
-               'slug'      => 'required|unique:posts',
-               'content'   => 'required',
-               'published' => 'required',
-           ]);
+       $validator = Validator::make($data, [
+           'client'      => 'required',
+           'lastname'    => 'required',
+           'firstname'   => 'required',
+           'phone'       => 'required',
+           'email'       => 'required',
+           'title'       => 'required',
+           'description' => 'required',
+           'start_date'  => 'required',
+           'end_date'    => 'required',
+           'status'      => 'required',
+           'paied_days'  => 'required'
+       ]);
 
-
-           if ($validator->fails()) {
-               return redirect()->back()->withErrors($validator);
-           }*/
-
-
+       if ($validator->fails()) {
+           return redirect()->back()->withErrors($validator);
+       }
 
         $project = Project::find($id);
         $project->client = request()->get('client');
@@ -72,22 +75,25 @@ class ProjectController extends Controller
 
     public function store()
     {
-        /*$slug = Str::slug(request()->get('name'));
-        $data = array_merge(request()->all(), ['slug' => $slug]);
+        $data = array_merge(request()->all());
 
         $validator = Validator::make($data, [
-            'name'      => 'required',
-            'slug'      => 'required|unique:posts',
-            'content'   => 'required',
-            'published' => 'required',
+            'client'      => 'required',
+            'lastname'    => 'required',
+            'firstname'   => 'required',
+            'phone'       => 'required',
+            'email'       => 'required',
+            'title'       => 'required',
+            'description' => 'required',
+            'start_date'  => 'required',
+            'end_date'    => 'required',
+            'status'      => 'required',
+            'paied_days'  => 'required'
         ]);
-
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-        }*/
-
-
+        }
 
         $project = new Project();
         $project->client = request()->get('client');

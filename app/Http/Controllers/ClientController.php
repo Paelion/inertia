@@ -32,22 +32,25 @@ class ClientController extends Controller
 
     public function update($id)
     {
-        /*$slug = Str::slug(request()->get('name'));
-           $data = array_merge(request()->all(), ['slug' => $slug]);
+       $data = array_merge(request()->all());
 
-           $validator = Validator::make($data, [
-               'name'      => 'required',
-               'slug'      => 'required|unique:posts',
-               'content'   => 'required',
-               'published' => 'required',
-           ]);
+       $validator = Validator::make($data, [
+           'description'      => 'required',
+           'company_name'     => 'required',
+           'legal_status'     => 'required',
+           'capital'          => 'required',
+           'siret'            => 'required',
+           'code_naf'         => 'required',
+           'country'          => 'required',
+           'address'          => 'required',
+           'zip_code'         => 'required',
+           'city'             => 'required',
+           'projects'         => 'required'
+       ]);
 
-
-           if ($validator->fails()) {
-               return redirect()->back()->withErrors($validator);
-           }*/
-
-
+       if ($validator->fails()) {
+           return redirect()->back()->withErrors($validator);
+       }
 
         $client = Client::find($id);
         $client->description = request()->get('description');
@@ -68,22 +71,25 @@ class ClientController extends Controller
 
     public function store()
     {
-        /*$slug = Str::slug(request()->get('name'));
-        $data = array_merge(request()->all(), ['slug' => $slug]);
+        $data = array_merge(request()->all());
 
         $validator = Validator::make($data, [
-            'name'      => 'required',
-            'slug'      => 'required|unique:posts',
-            'content'   => 'required',
-            'published' => 'required',
+            'description'      => 'required',
+            'company_name'     => 'required',
+            'legal_status'     => 'required',
+            'capital'          => 'required',
+            'siret'            => 'required',
+            'code_naf'         => 'required',
+            'country'          => 'required',
+            'address'          => 'required',
+            'zip_code'         => 'required',
+            'city'             => 'required',
+            'projects'         => 'required'
         ]);
-
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
-        }*/
-
-
+        }
 
         $client = new Client();
         $client->description = request()->get('description');
